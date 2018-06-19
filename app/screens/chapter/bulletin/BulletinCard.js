@@ -4,11 +4,12 @@ import ReadMore from 'react-native-read-more-text';
 
 export default class BulletinCard extends React.Component {
     render() {
+        let { title, content } = this.props || "lol"
         return (
             <View style={style.container}>
                 <View style={style.headerContainer}>
                     <View style={style.headerFlexLeft}>
-                        <Text style={textStyles.headerStyle}>Header Title</Text>
+                        <Text style={textStyles.headerStyle}>{title}</Text>
                     </View>
                     <View style={style.headerFlexRight}>
                         <Text style={textStyles.postDate}>Today at 9:45PM</Text>
@@ -36,7 +37,7 @@ export default class BulletinCard extends React.Component {
                         renderTruncatedFooter={this._renderTruncatedFooter}
                         renderRevealedFooter={this._renderRevealedFooter}
                         onReady={this._handleTextReady}>
-                        <Text style={style.content} numberOfLines={3}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a scelerisque nibh. Suspendisse blandit sem luctus, viverra mi tincidunt, scelerisque lorem. Suspendisse rutrum dictum dui eu pulvinar.</Text>
+                        <Text style={style.content} numberOfLines={3}>{content}</Text>
                     </ReadMore>
                     <Text style={textStyles.postAuthorText}>Posted by Austin Chauncey</Text>
                 </View>
@@ -135,7 +136,7 @@ const textStyles = StyleSheet.create({
     postAuthorText: {
         textAlign: "right",
         fontWeight: "300",
-        marginBottom:4,
-        marginRight:4
+        marginBottom: 4,
+        marginRight: 4
     }
 })
