@@ -1,29 +1,36 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import moment from 'moment';
 import ReadMore from 'react-native-read-more-text';
+import { View, Text, Image, StyleSheet } from 'react-native'
+
+// 
+import { ChapterPageView } from '../MyChapterDrawer';
+
 
 export default class BulletinCard extends React.Component {
     render() {
-        let { title, content } = this.props || "lol"
+        let { title, content, author, createdAt, image } = this.props
+        // refine time to a legible format
+        createdAt = moment(createdAt).calendar();
         return (
-            <View style={style.container}>
+            <ChapterPageView style={style.container}>
                 <View style={style.headerContainer}>
                     <View style={style.headerFlexLeft}>
                         <Text style={textStyles.headerStyle}>{title}</Text>
                     </View>
                     <View style={style.headerFlexRight}>
-                        <Text style={textStyles.postDate}>Today at 9:45PM</Text>
+                        <Text style={textStyles.postDate}>{createdAt}</Text>
                     </View>
                 </View>
 
 
                 {
-                    this.props.image ?
+                    image ?
 
                         <View style={style.imageContainer}>
                             <Image
                                 style={style.image}
-                                source={{ uri: "https://pbs.twimg.com/profile_images/694408733493841920/oEwwbqgO_400x400.jpg" }}
+                                source={{ uri: image }}
                             />
 
                         </View>
@@ -39,12 +46,12 @@ export default class BulletinCard extends React.Component {
                         onReady={this._handleTextReady}>
                         <Text style={style.content} numberOfLines={3}>{content}</Text>
                     </ReadMore>
-                    <Text style={textStyles.postAuthorText}>Posted by Austin Chauncey</Text>
+                    <Text style={textStyles.postAuthorText}>Posted by {author}</Text>
                 </View>
 
                 <View style={style.footerContainer}>
                 </View>
-            </View>
+            </ChapterPageView>
         )
     }
     _renderTruncatedFooter = (handlePress) => {
@@ -71,7 +78,7 @@ const style = StyleSheet.create({
         backgroundColor: "white",
         width: "92.5%",
         alignSelf: "center",
-        marginTop: 15,
+        marginBottom: 10,
         borderRadius: 3,
         shadowOpacity: 0.25,
         shadowRadius: 5,
@@ -80,13 +87,13 @@ const style = StyleSheet.create({
     },
     headerContainer: {
         display: "flex",
-        flexDirection: "row"
+        flexDirection: "row",
+        justifyContent: "space-between"
     },
     headerFlexLeft: {
-        flex: 2
+        flex: -1
     },
     headerFlexRight: {
-        flex: 1,
         alignSelf: "flex-end",
         marginBottom: 7.5,
         marginRight: 7.5
@@ -106,10 +113,6 @@ const style = StyleSheet.create({
         marginTop: 2,
         alignSelf: "center"
     },
-    footerContainer: {
-        backgroundColor: "yellow"
-    },
-
 
     divider: {
         height: 1,
@@ -122,7 +125,7 @@ const style = StyleSheet.create({
 
 const textStyles = StyleSheet.create({
     headerStyle: {
-        fontSize: 20,
+        fontSize: 18,
         margin: 7.5,
         fontWeight: "500"
     },
@@ -131,12 +134,14 @@ const textStyles = StyleSheet.create({
     },
     postDate: {
         textAlign: "right",
-        fontWeight: "300"
+        fontWeight: "300",
     },
     postAuthorText: {
         textAlign: "right",
         fontWeight: "300",
+        marginTop: 5,
         marginBottom: 4,
-        marginRight: 4
+        marginRight: 4,
+        fontStyle: "italic"
     }
 })

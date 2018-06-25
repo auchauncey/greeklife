@@ -13,7 +13,7 @@ class Billing extends React.Component {
       title: "Billing",
       headerBackTitle: 'Back',
       headerLeft: (
-        <MenuHamburger onPress={() => navigation.openDrawer()} />
+        <MenuHamburger onPress={() => navigation.openDrawer()} color="white" />
       ),
       ...defaultProfileHeaderStyles
     }

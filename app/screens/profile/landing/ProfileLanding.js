@@ -15,7 +15,7 @@ class ProfileLanding extends React.Component {
             title: "My Profile",
             headerBackTitle: 'Back',
             headerLeft: (
-                <MenuHamburger onPress={() => navigation.openDrawer()} />
+                <MenuHamburger onPress={() => navigation.openDrawer()} color="white" />
             ),
             ...defaultProfileHeaderStyles
         }
@@ -36,3 +36,7 @@ class ProfileLanding extends React.Component {
 export default ProfileLandingStack = createStackNavigator({
     ProfileLanding
 })
+
+ProfileLandingStack.navigationOptions = {
+    title: "My Profile"
+}

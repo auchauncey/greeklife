@@ -1,19 +1,20 @@
 import React from 'react'
-import { SafeAreaView, Text, Image } from 'react-native'
+import { Text, Image } from 'react-native'
+import PropTypes from 'prop-types'
 
 // Component Imports
-import { defaultChapterHeaderStyles } from '../MyChapterDrawer'
+import { getDefaultChapterStyles, ChapterPageView } from '../MyChapterDrawer'
 
 export default class PictureInfo extends React.Component {
     /**
      * 
      */
     static navigationOptions = ({ navigation }) => {
-        const { title } = navigation.getParam("pictureInfo") || "Picture Info"
-        
+        const { imageTitle } = navigation.getParam("pictureInfo") || "Picture Title"
+
         return {
-            title,
-            ...defaultChapterHeaderStyles
+            title:imageTitle,
+            ...getDefaultChapterStyles()
         }
     }
 
@@ -21,15 +22,28 @@ export default class PictureInfo extends React.Component {
      * 
      */
     render() {
-        const { pictureURL } = this.props.navigation.getParam('pictureInfo')
+        const { imageURL } = this.props.navigation.getParam('pictureInfo')
         return (
-            <SafeAreaView>
+            <ChapterPageView>
                 <Text>Pictures</Text>
                 <Image
                     style={{ width: 150, height: 150 }}
-                    source={{ uri: pictureURL }}
+                    source={{ uri: imageURL }}
                 />
-            </SafeAreaView>
+            </ChapterPageView>
         )
     }
+}
+
+PictureInfo.propTypes = {
+    navigation: PropTypes.shape({
+        state: PropTypes.shape({
+            params: PropTypes.shape({
+                pictureInfo: PropTypes.shape({
+                    imageURL: PropTypes.string.isRequired,
+                    imageTitle: PropTypes.string.isRequired
+                })
+            })
+        })
+    })
 }

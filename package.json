@@ -23,11 +23,18 @@
     "apollo-boost": "^0.1.9",
     "expo": "^27.0.1",
     "graphql": "^0.13.2",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-apollo": "^2.1.5",
+    "react-content-loader": "^3.1.2",
     "react-native": "~0.55.2",
-    "react-native-elements": "^0.19.1",
+    "react-native-autogrow-textinput": "^5.1.1",
+    "react-native-calendars": "^1.19.3",
+    "react-native-maps": "^0.21.0",
     "react-native-read-more-text": "^1.1.0",
-    "react-navigation": "^2.3.1"
+    "react-native-textinput-effects": "^0.4.2",
+    "react-navigation": "^2.3.1",
+    "tinycolor2": "^1.4.1"
   }
 }

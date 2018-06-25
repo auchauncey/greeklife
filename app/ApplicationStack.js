@@ -10,8 +10,8 @@ import { PIKE_COLOR_PRIMARY, KSU_COLOR_PRIMARY, GREEK_LIFE_COLOR_PRIMARY } from 
 
 export default ApplicationStack = createBottomTabNavigator(
     {
-        MyChapter: MyChapterDrawer,
         MyCampus: MyCampus,
+        MyChapter: MyChapterDrawer,
         MyProfile: MyProfileDrawer
     },
     {

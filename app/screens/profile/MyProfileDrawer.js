@@ -4,6 +4,7 @@ import { createDrawerNavigator } from 'react-navigation'
 import ProfileLanding from './landing/ProfileLanding'
 import Billing from './billing/Billing'
 import { GREEK_LIFE_COLOR_PRIMARY } from '../../util/settings'
+import StudyHoursView from './study/StudyHoursView';
 
 /**
  * Used for header configuration in the components of this directory
@@ -18,7 +19,8 @@ const defaultProfileHeaderStyles = {
 
 export default MyProfileDrawer = createDrawerNavigator({
   ProfileLanding,
-  Billing
+  Billing,
+  StudyHoursView
 })
 
 MyProfileDrawer.navigationOptions = {

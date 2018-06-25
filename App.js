@@ -1,43 +1,24 @@
+import React from 'react'
+import ApolloClient, { gql } from 'apollo-boost';
+import { ApolloProvider, Query } from 'react-apollo';
+import { Text, SafeAreaView, ActivityIndicator, StatusBar } from 'react-native';
+
+// Component Imports
+import SplashScreen from './app/components/SplashScreen';
 import { createSwitchNavigator, } from 'react-navigation';
 import ApplicationStack from './app/ApplicationStack';
 import AuthenticationStack from './app/screens/auth/AuthenticationStack'
 import AuthStatusLoadingScreen from './app/screens/auth/AuthStatusLoadingScreen'
-
-import React from 'react'
-
-import ApolloClient, { gql } from 'apollo-boost';
-import { ApolloProvider, Query } from 'react-apollo';
-import { Text, SafeAreaView, ActivityIndicator } from 'react-native';
+import tinycolor from 'tinycolor2'
+// GraphQL
+import { GET_USER } from './app/api/queries'
 
 // Pass your GraphQL endpoint to uri
 const client = new ApolloClient({ uri: 'https://api.graph.cool/simple/v1/cjf9z8lis7my60179c8yfiutz' });
 
 let userChapterColor = "white"
 let userCampusColor = "black"
-
-const GET_USER = gql`
-  query {
-    User(id: "cjffip0dnf0wv0132aprzz1ig") {
-      name
-      subchapter {
-        names
-        chapter {
-          primaryColors
-        }
-        campus {
-          primaryColor
-        }
-      }
-    }
-  }
-`
-
-const AppSwitchNavigator = createSwitchNavigator({
-  ApplicationStack: ApplicationStack,
-  AuthenticationStack: AuthenticationStack,
-  AuthenticationLoading: AuthStatusLoadingScreen
-})
-
+let currentUser = "cjffip19wf0ir01677i42cwsr"
 
 export default ApolloApp = () => (
   <ApolloProvider client={client}>
@@ -49,13 +30,11 @@ export default ApolloApp = () => (
  * Temporary loading solution
  */
 const App = () => (
-  <Query query={GET_USER}>
+  <Query query={GET_USER} variables={{ userId: currentUser }}>
     {({ loading, error, data }) => {
       if (loading)
         return (
-          <SafeAreaView>
-            <Text>Loading...</Text>
-          </SafeAreaView>
+          <SplashScreen />
         );
       if (error)
         return (
@@ -66,10 +45,20 @@ const App = () => (
       userChapterColor = "#" + data.User.subchapter.chapter.primaryColors
       userCampusColor = "#" + data.User.subchapter.campus.primaryColor
       return (
-        <AppSwitchNavigator />
+        <AppSwitchNavigator >
+          <StatusBar
+            barStyle={tinycolor(userChapterColor).isDark() ? "light-content" : "dark-content"}
+          />
+        </AppSwitchNavigator >
       )
     }}
-  </Query>
+  </Query >
 )
 
-export { userChapterColor, userCampusColor }
+const AppSwitchNavigator = createSwitchNavigator({
+  ApplicationStack: ApplicationStack,
+  AuthenticationStack: AuthenticationStack,
+  AuthenticationLoading: AuthStatusLoadingScreen
+})
+
+export { userChapterColor, userCampusColor, currentUser }

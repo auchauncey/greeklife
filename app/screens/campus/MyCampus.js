@@ -4,6 +4,8 @@ import { createStackNavigator } from 'react-navigation'
 
 //
 import { KSU_COLOR_PRIMARY } from '../../util/settings'
+import ChapterHouses from './ChapterHouses';
+import UpcomingEventsFeed from './UpcomingEventsFeed';
 
 const defaultCampusHeaderStyles = {
     headerTintColor: "white",
@@ -30,8 +32,9 @@ class MyCampus extends React.Component {
      */
     render() {
         return (
-            <View>
-                <Text>My Campus</Text>
+            <View style={{ display: "flex", flex: 1, flexDirection: "column" }}>
+                <ChapterHouses />
+                <UpcomingEventsFeed />
             </View>
         )
     }

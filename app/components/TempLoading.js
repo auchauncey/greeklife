@@ -4,7 +4,7 @@ import { SafeAreaView, ActivityIndicator } from 'react-native'
 export default class TempLoading extends Component {
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{justifyContent:"center",height:"100%"}}>
                 <ActivityIndicator />
             </SafeAreaView>
         )
